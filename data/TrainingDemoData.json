@@ -1,19 +1,19 @@
 [
-  { "_dataType": "demo" },
+  { "_dataType": "seed-initial" },
   {
-    "_entity": "Example",
-    "exampleId": "A1003",
-    "exampleName": "Darshna Songara",
-    "exampleDate": "2003-05-02",
-    "examplePrice": 2000,
-    "exampleQuantity": 3
+    "_entity": "moqui.training.entity.Training",
+    "trainingId": "A1003",
+    "trainingName": "Darshna Songara",
+    "trainingDate": "2003-05-02",
+    "trainingPrice": 2000,
+    "trainingDuration": 3
   },
   {
-    "_entity": "Example",
-    "exampleId": "A1004",
-    "exampleName": "Vandana Bakore",
-    "exampleDate": "2001-07-15",
-    "examplePrice": 4000,
-    "exampleQuantity": 1
+    "_entity": "moqui.training.entity.Training",
+    "trainingId": "A1004",
+    "trainingName": "Vandana Bakore",
+    "trainingDate": "2001-07-15",
+    "trainingPrice": 4000,
+    "trainingDuration": 1
   }
 ]
