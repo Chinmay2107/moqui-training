@@ -4,8 +4,8 @@
     <entity entity-name="MoquiTraining" package="service.handler">
         <field name="trainingId" type="id" is-pk="true"/>
         <field name="trainingName" type="text-medium"/>
-	    <field name="trainingDate" type="date"/>
-	    <field name="trainingPrice" type="currency-amount"/>
-	    <field name="trainingDuration" type="time"/>
+	<field name="trainingDate" type="date"/>
+	<field name="trainingPrice" type="number-integer"/> <!-- Or number-float can also be used if the price is in decimal format-->
+	<field name="trainingDuration" type="number-integer"/>
     </entity>
 </entities>
