@@ -1,6 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<entity-facade-xml type="demo">
-        <data>
-            <Example trainingName="Dakshita Sharma" trainingDate="2023-12-31" trainingPrice="15" trainingDuration="5" />
-        </data>
-</entity-facade-xml>
+
