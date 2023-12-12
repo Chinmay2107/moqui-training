@@ -50,24 +50,17 @@
 <!-- Third Part -->
 <!-- <service verb="test" noun="CreateTrainingEntity" type="script" location="component://script/moqui/training/script/createTrainingService.xml">
 </service> -->
-    <service verb="create" noun="TrainingGroovy" type="inline" >
+    <service verb="create" noun="TrainingGroovy" type="script" location="component://training-component/service/moqui/add/createTutorial.groovy">
         <description>
             Using groovy to create
         </description>
         <in-parameters>
-            <auto-parameters entity-name="MoquiTraining" />
+            <auto-parameters entity-name="MoquiTraining" include="nonpk"/>
         </in-parameters>
         <out-parameters>
             <parameter name="trainingId"/>
             <!-- <auto-parameters entity-name="moqui.training.entity.MoquiTraining" include="pk" required="true"/> -->
         </out-parameters>
-        <actions>
-            <script>
-                def trainingEntity = ec.entity.makeValue("moqui.training.entity.MoquiTraining")
-                trainingEntity.setFields(context, true,null,null)
-                if (!trainingEntity.trainingId) trainingEntity.setSequencedIdPrimary()
-                trainingEntity.create()
-            </script>
-        </actions>
+
     </service>
 </services>
