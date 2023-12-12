@@ -6,7 +6,7 @@
     "trainingName": "Darshna Songara",
     "trainingDate": "2003-05-02",
     "trainingPrice": 2000,
-    "trainingDuration": "12:00:00"
+    "trainingDuration": 7
   },
   {
     "_entity": "MoquiTraining",
@@ -14,6 +14,6 @@
     "trainingName": "Vandana Bakore",
     "trainingDate": "2001-07-15",
     "trainingPrice": 4000,
-    "trainingDuration": "11:00:00"
+    "trainingDuration": 20
   }
 ]
