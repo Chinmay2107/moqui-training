@@ -1,0 +1,3 @@
+<actions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+    <service-call name="create#moqui.training.entity.MoquiTraining" in-map="context" out-map="context"/>
+</actions>

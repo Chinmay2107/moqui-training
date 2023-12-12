@@ -1,18 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
-
+<!-- First Part -->
     <service verb="create" noun="MoquiTraining" displayName="Create a MoquiTraining Entity" type="entity-auto" allow-remote="true">
         <in-parameters>
-            <auto-parameters include="nonpk"/>
-            <parameter name="exampleName" required="true"/>
-            <parameter name="exampleDate" required="true"/>
-            <parameter name="examplePrice" required="true"/>
-            <parameter name="exampleQuantity" required="true"/>
+            <auto-parameters include="nonpk" entity-name="moqui.training.entity.MoquiTraining"/>
+
+            <parameter name="trainingName" required="true"><text-length max="255" min="1"></text-length></parameter>
+            <parameter name="trainingDate" default-value="1990-01-01"><time-range after="now" format="MM/dd/YYYY" /></parameter>
+            <parameter name="trainingPrice" default-value="0">
+                <number-range min="0"></number-range>
+                <number-decimal>
+                </number-decimal>
+            </parameter>
+            <parameter name="trainingDuration" default-value="0">
+                <number-range min="0"></number-range>
+                <number-integer>
+                </number-integer>
+            </parameter>
         </in-parameters>
         <out-parameters>
-            <auto-parameters include="pk" required="true"/>
+            <auto-parameters entity-name="moqui.training.entity.MoquiTraining" include="pk" required="true"/>
         </out-parameters>
     </service>
+<!-- Second Part -->
+    <service verb="add" noun="MoquiTraining" displayName="Create a MoquiTraining Entity" allow-remote="true">
+        <in-parameters>
+            <auto-parameters include="nonpk" entity-name="moqui.training.entity.MoquiTraining"/>
 
+            <parameter name="trainingName" required="true"><text-length max="255" min="1"></text-length></parameter>
+            <parameter name="trainingDate"><time-range after="now" format="MM/dd/YYYY" /></parameter>
+            <parameter name="trainingPrice" default-value="0">
+                <number-range min="0"></number-range>
+                <number-decimal>
+                </number-decimal>
+            </parameter>
+            <parameter name="trainingDuration" default-value="0">
+                <number-range min="0"></number-range>
+                <number-integer>
+                </number-integer>
+            </parameter>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters entity-name="moqui.training.entity.MoquiTraining" include="pk" required="true"/>
+        </out-parameters>
+        <actions>
+            <service-call name="create#moqui.training.entity.MoquiTraining" in-map="context" out-map="context"/>
+        </actions>
+    </service>
+<!-- Third Part -->
+<!-- <service verb="test" noun="CreateTrainingEntity" type="script" location="component://script/moqui/training/script/createTrainingService.xml">
+</service> -->
+    <service verb="create" noun="TrainingGroovy" type="inline" >
+        <description>
+            Using groovy to create
+        </description>
+        <in-parameters>
+            <auto-parameters entity-name="MoquiTraining" />
+        </in-parameters>
+        <out-parameters>
+            <parameter name="trainingId"/>
+            <!-- <auto-parameters entity-name="moqui.training.entity.MoquiTraining" include="pk" required="true"/> -->
+        </out-parameters>
+        <actions>
+            <script>
+                def trainingEntity = ec.entity.makeValue("moqui.training.entity.MoquiTraining")
+                trainingEntity.setFields(context, true,null,null)
+                if (!trainingEntity.trainingId) trainingEntity.setSequencedIdPrimary()
+                trainingEntity.create()
+            </script>
+        </actions>
+    </service>
 </services>
