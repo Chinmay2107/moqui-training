@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-facade-xml type="demo">
+        <data>
+            <Example exampleName="Dakshita Sharma" exampleDate="2023-12-31" examplePrice="15" exampleQuantity="50" />
+        </data>
+</entity-facade-xml>

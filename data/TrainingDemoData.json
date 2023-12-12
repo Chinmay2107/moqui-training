@@ -1,0 +1,19 @@
+[
+  { "_dataType": "demo" },
+  {
+    "_entity": "Example",
+    "exampleId": "A1003",
+    "exampleName": "Darshna Songara",
+    "exampleDate": "2003-05-02",
+    "examplePrice": 2000,
+    "exampleQuantity": 3
+  },
+  {
+    "_entity": "Example",
+    "exampleId": "A1004",
+    "exampleName": "Vandana Bakore",
+    "exampleDate": "2001-07-15",
+    "examplePrice": 4000,
+    "exampleQuantity": 1
+  }
+]
