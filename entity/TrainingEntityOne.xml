@@ -4,8 +4,8 @@
     <entity entity-name="Training" package="service.handler">
         <field name="trainingId" type="id" is-pk="true"/>
         <field name="trainingName" type="text-medium"/>
-	<field name="trainingDate" type="date"/>
-	<field name="trainingPrice" type="number-integer"/>
-	<field name="trainingDuration" type="number-integer"/>
+	    <field name="trainingDate" type="date"/>
+	    <field name="trainingPrice" type="currency-amount"/>
+	    <field name="trainingDuration" type="time"/>
     </entity>
 </entities>
