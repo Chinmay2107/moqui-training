@@ -1,4 +1,4 @@
-moqui.training.entity.Training,seed-initial
+moqui.training.entity.MoquiTraining,seed-initial
 trainingId, trainingName, trainingDate, trainingPrice, trainingDuration
 0701CS202033, Jaskeerat Singh, 2023-10-08, 6000,90
 0701CS202044, Krishna Aggrawal, 2023-09-11, 9000,30

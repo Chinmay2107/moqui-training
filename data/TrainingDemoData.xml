@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entity-facade-xml type="seed-initial">
-            <moqui.training.entity.Training trainingName="Dakshita Sharma" trainingDate="2023-12-31" trainingPrice="1500" trainingDuration="60" />
-            <moqui.training.entity.Training trainingName="Chinmay Sharma" trainingDate="2023-12-15" trainingPrice="1800" trainingDuration="70" />
-    <moqui.training.entity.Training trainingName="Tushar Sharma" trainingDate="2012-07-04" trainingPrice="2800" trainingDuration="4" />
+            <moqui.training.entity.MoquiTraining trainingName="Dakshita Sharma" trainingDate="2023-12-31" trainingPrice="1500" trainingDuration="60" />
+            <moqui.training.entity.MoquiTraining trainingName="Chinmay Sharma" trainingDate="2023-12-15" trainingPrice="1800" trainingDuration="70" />
+    <moqui.training.entity.MoquiTrainingTraining trainingName="Tushar Sharma" trainingDate="2012-07-04" trainingPrice="2800" trainingDuration="4" />
 </entity-facade-xml>
