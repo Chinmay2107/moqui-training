@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+    <!-- Assignment 4 -->
+    <!-- 1. Get a list of all the entities -->
+    <service verb="fetch" noun="MoquiTrainingEntities" displayName="Fetches MoquiTraining Entities from the database" allow-remote="true">
+        <out-parameters>
+            <parameter name="entityList"/>
+        </out-parameters>
+        <actions>
+            <entity-find entity-name="moqui.training.entity.MoquiTraining" list="entityList">
+
+            </entity-find>
+        </actions>
+    </service>
+    <!-- 1.a. Find records based on the training name or training id  -->
+    <service verb="get" noun="MoquiTrainingEntitiesBasedOnFields" >
+        <description>This service returns record based on trainingId and trainingName
+            Any one field or both can be passed to fetch the record.</description>
+        <in-parameters>
+            <parameter name="trainingId"/>
+            <parameter name="trainingName"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="entityList"/>
+        </out-parameters>
+        <actions>
+                <entity-find entity-name="moqui.training.entity.MoquiTraining" list="entityList">
+                    <econditions combine="or">
+                        <econdition field-name="trainingName" operator="like" value="%${trainingName}%"/>
+                        <econdition field-name="trainingId"/>
+                    </econditions>
+                </entity-find>
+        </actions>
+    </service>
+    <!-- 1.b. List of matching records with the input  -->
+    <service verb="get" noun="MoquiTrainingEntitiesBasedOnMultipleFields" >
+        <in-parameters>
+            <auto-parameters include="nonpk" entity-name="moqui.training.entity.MoquiTraining"/>
+            <parameter name="trainingId" required="true"><text-length max="255" min="1"></text-length></parameter>
+            <parameter name="trainingName" required="true"><text-length max="255" min="1"></text-length></parameter>
+            <parameter name="trainingDate" default-value="1990-01-01"><time-range format="MM/dd/YYYY" /></parameter>
+            <parameter name="trainingPrice" default-value="0">
+                <number-range min="0"></number-range>
+                <number-decimal>
+                </number-decimal>
+            </parameter>
+            <parameter name="trainingDuration" default-value="0">
+                <number-range min="0"></number-range>
+                <number-integer>
+                </number-integer>
+            </parameter>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="entityList"/>
+        </out-parameters>
+        <actions>
+            <entity-find entity-name="moqui.training.entity.MoquiTraining" list="entityList">
+                    <econdition field-name="trainingId"/>
+                    <econdition field-name="trainingName"/>
+                    <econdition field-name="trainingDate"/>
+                    <econdition field-name="trainingPrice"/>
+                    <econdition field-name="trainingDuration"/>
+            </entity-find>
+        </actions>
+    </service>
+    <!-- 1.c. Records with only particular fields to display  -->
+    <service verb="get" noun="MoquiTrainingEntitiesParticularFields">
+        <out-parameters>
+            <parameter name="entityList"/>
+        </out-parameters>
+        <actions>
+            <entity-find entity-name="moqui.training.entity.MoquiTraining" list="entityList">
+                <select-field field-name="trainingId"/>
+                <select-field field-name="trainingName"/>
+                <select-field field-name="trainingDate"/>
+            </entity-find>
+        </actions>
+    </service>
+    <!-- 2.Implement a service which will create/update records for the MoquiTraining entity.
+Check if a record already exists for the training record using the trainingName/trainingId input.
+If the record already exists, update the record with input values.
+If the record does not exist, create a new record with input values.
+-->
+    <service verb="createOrUpdate" noun="MoquiTrainingEntity">
+        <description>This service takes input value for fields and check for existence
+            of such record if already present, updates the record else creates a new record</description>
+        <in-parameters>
+            <auto-parameters include="nonpk" entity-name="moqui.training.entity.MoquiTraining"/>
+            <parameter name="trainingId" required="true"><text-length max="255" min="1"></text-length></parameter>
+            <parameter name="trainingName" required="true"><text-length max="255" min="1"></text-length></parameter>
+            <parameter name="trainingDate" default-value="1990-01-01"><time-range format="MM/dd/YYYY" /></parameter>
+            <parameter name="trainingPrice" default-value="0">
+                <number-range min="0"></number-range>
+                <number-decimal>
+                </number-decimal>
+            </parameter>
+            <parameter name="trainingDuration" default-value="0">
+                <number-range min="0"></number-range>
+                <number-integer>
+                </number-integer>
+            </parameter>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters include="pk" entity-name="moqui.training.entity.MoquiTraining"/>
+        </out-parameters>
+        <actions>
+            <entity-find-one entity-name="moqui.training.entity.MoquiTraining" value-field="entity">
+            </entity-find-one>
+            <if condition="entity==null"><then>
+                <entity-make-value entity-name="moqui.training.entity.MoquiTraining" value-field="entityRecord" map="[trainingId: trainingId, trainingName: trainingName, trainingDate: trainingDate, trainingPrice: trainingPrice, trainingDuration: trainingDuration]"/>
+                <entity-create value-field="entityRecord"/>
+        </then><else>
+            <entity-make-value entity-name="moqui.training.entity.MoquiTraining" value-field="entityRecord" map="[trainingId: trainingId, trainingName: trainingName, trainingDate: trainingDate, trainingPrice: trainingPrice, trainingDuration: trainingDuration]"/>
+            <entity-update value-field="entityRecord"/>
+            </else></if>
+        </actions>
+    </service>
+</services>
