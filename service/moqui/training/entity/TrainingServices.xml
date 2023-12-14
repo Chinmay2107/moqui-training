@@ -50,7 +50,7 @@
         </actions>
     </service>
 <!-- Third Part -->
-    <service verb="create" noun="MoquiTrainingGr" type="script" location="component://mantle-usl/service/mantle/party/PartyServices/addMoquiEntity.groovy">
+    <service verb="create" noun="MoquiTrainingGroovy" type="script" location="component://mantle-usl/service/mantle/party/PartyServices/addMoquiEntity.groovy">
     <description>
         Implemented a service with implementation logic in a groovy script to create data.
         I have to place the groovy file in mantle-usl as the groovy file is not working in my custom component folder
