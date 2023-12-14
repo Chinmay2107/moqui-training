@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
-    <!-- Assignment 5.1 -->
-    <service verb="create" noun="Product" type="entity-auto">
+    <!-- Assignment 5.2 --> <!--In 5.1 I just used create Entity and inserted a record, as in repository Training-Assignment-5.1-->
+    <service verb="store" noun="Product" type="inline">
         <description>Gone through the product entity available in mantle-udm
         Created a service to insert a record in product entity. Added dependency in component.xml file
         </description>
@@ -9,12 +9,19 @@
             <auto-parameters include="nonpk" entity-name="mantle.product.Product"/>
             <parameter name="productName" required="true"/>
             <parameter name="description" required="true"/>
-            <parameter name="priceUomId" default-value="USD"/>
+            <parameter name="priceUomId"/>
         </in-parameters>        
         <out-parameters>
             <auto-parameters include="pk"/>
             <parameter name="productId"/>
         </out-parameters>
+        <actions>
+            <if condition="priceUomId==null || priceUomId.length()==0"><then>
+                <return error="true" message="priceUomId is needed for product price"/>
+            </then><else>
+
+            </else></if>
+        </actions>
     </service>
 
 </services>
