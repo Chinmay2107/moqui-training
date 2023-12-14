@@ -1,0 +1,4 @@
+moqui.training.entity.TrainingServices.add#MoquiTrainingUsingCSV, demo
+trainingId, trainingName, trainingDate, trainingPrice, trainingDuration
+0701CS201066, Suryanshi Nigam, 2002-11-12, 6000, 6
+0701CS201009, Ashwini Soni, 2002-10-14, 8000, 4

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
-<!-- First Part -->
+<!-- Assignment 3 -->
+    <!-- First Part -->
     <service verb="create" noun="MoquiTraining" displayName="Create a MoquiTraining Entity" type="entity-auto" allow-remote="true">
+        <description>entity-auto service for creating records with validations on fields</description>
         <in-parameters>
             <auto-parameters include="nonpk" entity-name="moqui.training.entity.MoquiTraining"/>
-
             <parameter name="trainingName" required="true"><text-length max="255" min="1"></text-length></parameter>
-            <parameter name="trainingDate" default-value="1990-01-01"><time-range after="now" format="MM/dd/YYYY" /></parameter>
+            <parameter name="trainingDate" default-value="1990-01-01"><time-range format="MM/dd/YYYY" /></parameter>
             <parameter name="trainingPrice" default-value="0">
                 <number-range min="0"></number-range>
                 <number-decimal>
@@ -24,6 +25,7 @@
     </service>
 <!-- Second Part -->
     <service verb="add" noun="MoquiTraining" displayName="Create a MoquiTraining Entity" allow-remote="true">
+        <description>Implemented a service with default type(inline) to create records for the entity</description>
         <in-parameters>
             <auto-parameters include="nonpk" entity-name="moqui.training.entity.MoquiTraining"/>
 
@@ -48,19 +50,59 @@
         </actions>
     </service>
 <!-- Third Part -->
-<!-- <service verb="test" noun="CreateTrainingEntity" type="script" location="component://script/moqui/training/script/createTrainingService.xml">
-</service> -->
-    <service verb="create" noun="TrainingGroovy" type="script" location="component://training-component/service/moqui/add/createTutorial.groovy">
-        <description>
-            Using groovy to create
-        </description>
+    <service verb="create" noun="MoquiTrainingGr" type="script" location="component://mantle-usl/service/mantle/party/PartyServices/addMoquiEntity.groovy">
+    <description>
+        Implemented a service with implementation logic in a groovy script to create data.
+        I have to place the groovy file in mantle-usl as the groovy file is not working in my custom component folder
+        The code witten in the groovy file is:
+        def training=ec.entity.makeValue("moqui.training.entity.MoquiTraining")
+        training.setFields(context,true,null,null)
+        if(!training.trainingId) training.setSequencedIdPrimary() (To autogenerate Id as it's not passed by the user)
+        training.create()
+    </description>
         <in-parameters>
-            <auto-parameters entity-name="MoquiTraining" include="nonpk"/>
+            <auto-parameters entity-name="moqui.training.entity.MoquiTraining" include="nonpk"/>
+            <parameter name="trainingName" required="true"><text-length max="255" min="1"></text-length></parameter>
+            <parameter name="trainingDate"><time-range after="now" format="MM/dd/YYYY" /></parameter>
+            <parameter name="trainingPrice" default-value="0">
+                <number-range min="0"></number-range>
+                <number-decimal>
+                </number-decimal>
+            </parameter>
+            <parameter name="trainingDuration" default-value="0">
+                <number-range min="0"></number-range>
+                <number-integer>
+                </number-integer>
+            </parameter>
         </in-parameters>
         <out-parameters>
-            <parameter name="trainingId"/>
+            <auto-parameters entity-name="moqui.training.entity.MoquiTraining" include="pk"/>
             <!-- <auto-parameters entity-name="moqui.training.entity.MoquiTraining" include="pk" required="true"/> -->
         </out-parameters>
-
+    </service>
+<!-- Fourth Part -->
+    <service verb="add" noun="MoquiTrainingUsingCSV" displayName="Create a MoquiTraining Entity" allow-remote="true">
+        <description>Created a  csv data file(TrainingDemoDataService.csv) to input data from the service to add data with validations.</description>
+        <in-parameters>
+            <auto-parameters include="nonpk" entity-name="moqui.training.entity.MoquiTraining"/>
+            <parameter name="trainingName" required="true"><text-length max="255" min="1"></text-length></parameter>
+            <parameter name="trainingDate" default-value="1990-01-01"><time-range format="MM/dd/YYYY" /></parameter>
+            <parameter name="trainingPrice" default-value="0">
+                <number-range min="0"></number-range>
+                <number-decimal>
+                </number-decimal>
+            </parameter>
+            <parameter name="trainingDuration" default-value="0">
+                <number-range min="0"></number-range>
+                <number-integer>
+                </number-integer>
+            </parameter>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters entity-name="moqui.training.entity.MoquiTraining" include="pk" required="true"/>
+        </out-parameters>
+        <actions>
+            <service-call name="create#moqui.training.entity.MoquiTraining" in-map="context" out-map="context"/>
+        </actions>
     </service>
 </services>
