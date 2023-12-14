@@ -70,9 +70,7 @@
         </out-parameters>
         <actions>
             <entity-find entity-name="moqui.training.entity.MoquiTraining" list="entityList">
-                <select-field field-name="trainingId"/>
-                <select-field field-name="trainingName"/>
-                <select-field field-name="trainingDate"/>
+                <select-field field-name="trainingId, trainingName, trainingDate"/>
             </entity-find>
         </actions>
     </service>

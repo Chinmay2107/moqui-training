@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+    <!-- Assignment 5.1 -->
+    <service verb="create" noun="Product" type="entity-auto">
+        <description>Gone through the product entity available in mantle-udm
+        Created a service to insert a record in product entity. Added dependency in component.xml file
+        </description>
+        <in-parameters>
+            <auto-parameters include="nonpk" entity-name="mantle.product.Product"/>
+            <parameter name="productName" required="true"/>
+            <parameter name="description" required="true"/>
+            <parameter name="priceUomId" default-value="USD"/>
+        </in-parameters>        
+        <out-parameters>
+            <auto-parameters include="pk"/>
+            <parameter name="productId"/>
+        </out-parameters>
+    </service>
+
+</services>
