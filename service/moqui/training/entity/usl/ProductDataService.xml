@@ -9,7 +9,8 @@
             <auto-parameters include="nonpk" entity-name="mantle.product.Product"/>
             <parameter name="productName" required="true"/>
             <parameter name="description" required="true"/>
-            <parameter name="priceUomId"/>
+            
+            <parameter name="priceUomId" entity-name="mantle.product.ProductPrice"/>
         </in-parameters>        
         <out-parameters>
             <auto-parameters include="pk"/>
@@ -21,6 +22,30 @@
             </then><else>
 
             </else></if>
+        </actions>
+    </service>
+    <service verb="get" noun="ProductDetails" type="inline">
+        <in-parameters>
+            <auto-parameters include="pk" entity-name="mantle.product.Product"/>
+            <parameter name="productId" required="true"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="productDetails"/>
+            <parameter name="productDetails2"/>
+        </out-parameters>
+        <actions>
+            <entity-find entity-name="mantle.product.Product" list="productDetails">
+                <econdition field-name="productId" value="${productId}"/>
+                <select-field field-name="productId,productName,description"/>
+            </entity-find>
+            <if condition="!productDetails"><return error="true" message="Product does not exist"/>
+            </if>
+            <entity-find entity-name="mantle.product.ProductPrice" list="productDetails2">
+                    <econdition field-name="productId" value="${productId}"/>
+                    <select-field field-name="price,priceUomId"/>
+                </entity-find>
+              <!--  <filter-map-list list="productDetails" to-list="l1"/>
+                <filter-map-list list="productDetails2" to-list="l1"/> -->
         </actions>
     </service>
 
