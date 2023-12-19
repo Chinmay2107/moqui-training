@@ -1,54 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
     <!-- Assignment 5.1 -->
-    <service verb="create" noun="Product" type="entity-auto">
-        <description>Gone through the product entity available in mantle-udm
-            Created a service to insert a record in product entity. Added dependency in component.xml file
-        </description>
-        <in-parameters>
-            <auto-parameters include="nonpk" entity-name="mantle.product.Product"/>
-            <parameter name="productName" required="true"/>
-            <parameter name="description" required="true"/>
-        </in-parameters>
-        <out-parameters>
-            <auto-parameters include="pk"/>
-            <parameter name="productId"/>
-        </out-parameters>
-    </service>
-    <service verb="create" noun="ProductPrice" type="entity-auto">
-        <in-parameters>
-            <auto-parameters include="nonpk" entity-name="mantle.product.ProductPrice"/>
-            <parameter name="price"/>
-            <parameter name="priceUomId" default-value="USD"/>
-        </in-parameters>
-        <out-parameters>
-            <auto-parameters include="pk"/>
-            <parameter name="productId"/>
-        </out-parameters>
-    </service>
-    <!-- The following service is according to the Assignment 5.1
-    <service verb="store" type="inline" noun="ProductDetails" >
-        <description>Create a new product, with the attributes as written in in-parameters
-        and written the productId that is generated.
-        </description>
-        <in-parameters>
-            <parameter name="productName" required="true"/>
-            <parameter name="description" required="true"/>
-            <parameter name="price"/>
-            <parameter name="priceUomId" default-value="USD"/>
-        </in-parameters>
-        <out-parameters>
-            <parameter name="productId"/>
-        </out-parameters>
-        <actions>
-            <if condition="priceUomId.length()==0"><set field="priceUomId" value="USD"/></if>
-            <service-call name="moqui.training.entity.usl.ProductDataService.create#Product" in-map="context" out-map="context"/>
-            <log message="=====================${productId}"/>
-            // <script>context.put("productId",context.get())</script>
-            <service-call name="moqui.training.entity.usl.ProductDataService.create#ProductPrice" in-map="context" out-map="context"/>
-        </actions>
-    </service>
-    -->
     <service verb="store" type="inline" noun="ProductDetails" >
         <description>Create a new product, with the attributes as written in in-parameters
             and written the productId that is generated.
@@ -64,10 +16,8 @@
         </out-parameters>
         <actions>
             <if condition="!priceUomId"><return error="true" message="priceUomId is needed for product price"/></if>
-            <service-call name="moqui.training.entity.usl.ProductDataService.create#Product" in-map="context" out-map="context"/>
-            <log message="=====================${productId}"/>
-            <!-- <script>context.put("productId",context.get())</script> -->
-            <service-call name="moqui.training.entity.usl.ProductDataService.create#ProductPrice" in-map="context" out-map="context"/>
+            <service-call name="create#mantle.product.Product" in-map="context" out-map="context"/>
+            <service-call name="create#mantle.product.ProductPrice" in-map="context" out-map="context"/>
         </actions>
     </service>
     <service verb="get" noun="ProductDetails" type="inline">
@@ -85,13 +35,6 @@
                     <parameter name="priceUomId"/>
                 </parameter>
             </parameter>
-   <!--         <parameter name="productDetailsList" type="List">
-                <parameter name="productDetailMap" type="Map">
-                    <parameter name="productName"/>
-                    <parameter name="description"/>
-                </parameter>
-            </parameter>
--->
         </out-parameters>
         <actions>
                <entity-find entity-name="mantle.product.Product" list="productDetailsList">
@@ -112,3 +55,27 @@
 
 
 </services>
+
+        <!-- The following service is according to the Assignment 5.1
+            <service verb="store" type="inline" noun="ProductDetails" >
+                <description>Create a new product, with the attributes as written in in-parameters
+                and written the productId that is generated.
+                </description>
+                <in-parameters>
+                    <parameter name="productName" required="true"/>
+                    <parameter name="description" required="true"/>
+                    <parameter name="price"/>
+                    <parameter name="priceUomId" default-value="USD"/>
+                </in-parameters>
+                <out-parameters>
+                    <parameter name="productId"/>
+                </out-parameters>
+                <actions>
+                    <if condition="priceUomId.length()==0"><set field="priceUomId" value="USD"/></if>
+                    <service-call name="moqui.training.entity.usl.ProductDataService.create#Product" in-map="context" out-map="context"/>
+                    <log message="=====================${productId}"/>
+                    // <script>context.put("productId",context.get())</script>
+                    <service-call name="moqui.training.entity.usl.ProductDataService.create#ProductPrice" in-map="context" out-map="context"/>
+                </actions>
+            </service>
+            -->
