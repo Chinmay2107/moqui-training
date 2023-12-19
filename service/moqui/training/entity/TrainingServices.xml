@@ -105,4 +105,15 @@
             <service-call name="create#moqui.training.entity.MoquiTraining" in-map="context" out-map="context"/>
         </actions>
     </service>
+    <!-- The following service is a part of Assignment 6-->
+    <service verb="fetch" noun="Records" type="inline">
+        <out-parameters>
+            <parameter name="moquiEntitiesList"/>
+        </out-parameters>
+        <actions>
+            <entity-find entity-name="moqui.training.entity.MoquiTraining" list="moquiEntitiesList">
+                <select-field field-name="trainingId,trainingName,trainingPrice"/>
+            </entity-find>
+        </actions>
+    </service>
 </services>

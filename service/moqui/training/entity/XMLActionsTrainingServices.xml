@@ -79,7 +79,7 @@ Check if a record already exists for the training record using the trainingName/
 If the record already exists, update the record with input values.
 If the record does not exist, create a new record with input values.
 -->
-    <service verb="createOrUpdate" noun="MoquiTrainingEntity">
+    <service verb="store" noun="MoquiTrainingEntity">
         <description>This service takes input value for fields and check for existence
             of such record if already present, updates the record else creates a new record</description>
         <in-parameters>
@@ -104,7 +104,7 @@ If the record does not exist, create a new record with input values.
         <actions>
             <entity-find-one entity-name="moqui.training.entity.MoquiTraining" value-field="entity">
             </entity-find-one>
-            <if condition="entity==null"><then>
+            <if condition="!entity"><then>
                 <entity-make-value entity-name="moqui.training.entity.MoquiTraining" value-field="entityRecord" map="[trainingId: trainingId, trainingName: trainingName, trainingDate: trainingDate, trainingPrice: trainingPrice, trainingDuration: trainingDuration]"/>
                 <entity-create value-field="entityRecord"/>
         </then><else>
