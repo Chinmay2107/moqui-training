@@ -26,29 +26,6 @@
             <parameter name="productId"/>
         </out-parameters>
     </service>
-    <!-- The following service is according to the Assignment 5.1
-    <service verb="store" type="inline" noun="ProductDetails" >
-        <description>Create a new product, with the attributes as written in in-parameters
-        and written the productId that is generated.
-        </description>
-        <in-parameters>
-            <parameter name="productName" required="true"/>
-            <parameter name="description" required="true"/>
-            <parameter name="price"/>
-            <parameter name="priceUomId" default-value="USD"/>
-        </in-parameters>
-        <out-parameters>
-            <parameter name="productId"/>
-        </out-parameters>
-        <actions>
-            <if condition="priceUomId.length()==0"><set field="priceUomId" value="USD"/></if>
-            <service-call name="moqui.training.entity.usl.ProductDataService.create#Product" in-map="context" out-map="context"/>
-            <log message="=====================${productId}"/>
-            // <script>context.put("productId",context.get())</script>
-            <service-call name="moqui.training.entity.usl.ProductDataService.create#ProductPrice" in-map="context" out-map="context"/>
-        </actions>
-    </service>
-    -->
     <service verb="store" type="inline" noun="ProductDetails" >
         <description>Create a new product, with the attributes as written in in-parameters
             and written the productId that is generated.
@@ -85,13 +62,6 @@
                     <parameter name="priceUomId"/>
                 </parameter>
             </parameter>
-   <!--         <parameter name="productDetailsList" type="List">
-                <parameter name="productDetailMap" type="Map">
-                    <parameter name="productName"/>
-                    <parameter name="description"/>
-                </parameter>
-            </parameter>
--->
         </out-parameters>
         <actions>
                <entity-find entity-name="mantle.product.Product" list="productDetailsList">
@@ -112,3 +82,27 @@
 
 
 </services>
+
+        <!-- The following service is according to the Assignment 5.1
+            <service verb="store" type="inline" noun="ProductDetails" >
+                <description>Create a new product, with the attributes as written in in-parameters
+                and written the productId that is generated.
+                </description>
+                <in-parameters>
+                    <parameter name="productName" required="true"/>
+                    <parameter name="description" required="true"/>
+                    <parameter name="price"/>
+                    <parameter name="priceUomId" default-value="USD"/>
+                </in-parameters>
+                <out-parameters>
+                    <parameter name="productId"/>
+                </out-parameters>
+                <actions>
+                    <if condition="priceUomId.length()==0"><set field="priceUomId" value="USD"/></if>
+                    <service-call name="moqui.training.entity.usl.ProductDataService.create#Product" in-map="context" out-map="context"/>
+                    <log message="=====================${productId}"/>
+                    // <script>context.put("productId",context.get())</script>
+                    <service-call name="moqui.training.entity.usl.ProductDataService.create#ProductPrice" in-map="context" out-map="context"/>
+                </actions>
+            </service>
+            -->

@@ -38,7 +38,7 @@
             <auto-parameters include="nonpk" entity-name="moqui.training.entity.MoquiTraining"/>
             <parameter name="trainingId" required="true"><text-length max="255" min="1"></text-length></parameter>
             <parameter name="trainingName" required="true"><text-length max="255" min="1"></text-length></parameter>
-            <parameter name="trainingDate" default-value="1990-01-01"><time-range format="MM/dd/YYYY" /></parameter>
+            <parameter name="trainingDate" ><time-range format="MM-dd-YYYY" /></parameter>
             <parameter name="trainingPrice" default-value="0">
                 <number-range min="0"></number-range>
                 <number-decimal>
@@ -86,7 +86,7 @@ If the record does not exist, create a new record with input values.
             <auto-parameters include="nonpk" entity-name="moqui.training.entity.MoquiTraining"/>
             <parameter name="trainingId" required="true"><text-length max="255" min="1"></text-length></parameter>
             <parameter name="trainingName" required="true"><text-length max="255" min="1"></text-length></parameter>
-            <parameter name="trainingDate" default-value="1990-01-01"><time-range format="MM/dd/YYYY" /></parameter>
+            <parameter name="trainingDate" default-value="1990-01-01"><time-range format="MM-dd-YYYY" /></parameter>
             <parameter name="trainingPrice" default-value="0">
                 <number-range min="0"></number-range>
                 <number-decimal>

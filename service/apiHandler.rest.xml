@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/rest-api-3.xsd"
-          name="moquiAPI" displayName="Moqui Entity Rest API" version="2.0.0" require-authentication="anonymous-all">
+          name="moquiAPI" displayName="Moqui Entity Rest API" version="2.0.0">
     <!-- I can also go for calling a service for the same both are working fine -->
-    <resource name="moquiEntity" require-authentication="anonymous-all" displayName="MOQUI Entity Rest API">
+    <resource name="moquiEntity" displayName="MOQUI Entity Rest API">
         <resource name="add">
             <method type="post">
                 <service name="moqui.training.entity.TrainingServices.create#MoquiTraining"/>

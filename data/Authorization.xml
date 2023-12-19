@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The following file is to provide authorization -->
+<entity-facade-xml type="seed-initial">
+    <artifactGroups artifactGroupId="MANTLE_API" description="Mantle REST API (via root resource)">
+        <artifacts artifactTypeEnumId="AT_REST_PATH" artifactName="/moquiAPI" inheritAuthz="Y"/>
+        <authz artifactAuthzId="MANTLE_API_ADMIN" userGroupId="ADMIN" authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
+    </artifactGroups>
+</entity-facade-xml>
