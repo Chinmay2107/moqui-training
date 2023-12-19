@@ -15,7 +15,9 @@
             <parameter name="productId"/>
         </out-parameters>
         <actions>
-            <if condition="!priceUomId"><return error="true" message="priceUomId is needed for product price"/></if>
+            <if condition="price!=null">
+                <if condition="!priceUomId"><return error="true" message="priceUomId is needed for product price"/></if>
+            </if>
             <service-call name="create#mantle.product.Product" in-map="context" out-map="context"/>
             <service-call name="create#mantle.product.ProductPrice" in-map="context" out-map="context"/>
         </actions>
