@@ -5,7 +5,7 @@
     <resource name="moquiEntity" displayName="MOQUI Entity Rest API">
         <resource name="add">
             <method type="post">
-                <service name="moqui.training.entity.TrainingServices.create#moqui.training.entity.MoquiTraining"/>
+                <service name="moqui.training.entity.TrainingServices.create#MoquiTraining"/>
             </method>
         </resource>
         <resource name="entities">
