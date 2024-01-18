@@ -8,4 +8,25 @@
 	    <field name="trainingPrice" type="number-decimal"/>
 	    <field name="trainingDuration" type="number-integer"/>
     </entity>
+
+    <entity entity-name="Student" package="moqui.training.entity">
+        <field name="studentId" type="id" is-pk="true"/>
+        <field name="studentName" type="text-medium"/>
+        <field name="studentAge" type="number-integer"/>
+        <field name="trainingId" type="id"/>
+<!--    <relationship type="many" related="moqui.training.entity.Student" short-alias="StudentTraining">-->
+<!--        <key-map field-name="trainingId"/>-->
+<!--    </relationship>-->
+    </entity>
+
+    <view-entity entity-name="StudentAndTraining" package="moqui.training.entity">
+        <member-entity entity-alias="MT" entity-name="moqui.training.entity.MoquiTraining"/>
+        <member-entity entity-alias="S" entity-name="moqui.training.entity.Student" join-from-alias="MT" >
+        <key-map field-name="trainingId"/>
+        </member-entity>
+        <alias entity-alias="S" name="studentId"/>
+        <alias entity-alias="S" name="studentName"/>
+        <alias entity-alias="MT" name="trainingName"/>
+        <alias entity-alias="MT" name="trainingDuration"/>
+    </view-entity>
 </entities>

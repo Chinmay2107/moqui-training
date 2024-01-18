@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/rest-api-3.xsd"
+          name="moquiAPI" displayName="Moqui Entity Rest API" version="2.0.0">
+    <!-- I can also go for calling a service for the same both are working fine -->
+    <resource name="moquiEntity" displayName="MOQUI Entity Rest API">
+        <resource name="add">
+            <method type="post">
+                <service name="moqui.training.entity.TrainingServices.create#MoquiTraining"/>
+            </method>
+        </resource>
+        <resource name="entities">
+            <method type="get">
+                <entity name="moqui.training.entity.MoquiTraining" operation="list"/>
+            </method>
+        </resource>
+        <resource name="fetch">
+            <method type="get">
+                <service name="moqui.training.entity.TrainingServices.fetch#Records"/>
+            </method>
+        </resource>
+        <id name="trainingId">
+            <method type="get">
+                <entity name="moqui.training.entity.MoquiTraining" operation="one"/>
+            </method>
+            <method type="delete">
+                <entity name="moqui.training.entity.MoquiTraining" operation="delete"/>
+            </method>
+        </id>
+        <resource name="store">
+            <method type="put">
+                <service name="moqui.training.entity.XMLActionsTrainingServices.store#MoquiTrainingEntity"/>
+            </method>
+        </resource>
+    </resource>
+</resource>

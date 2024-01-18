@@ -38,7 +38,7 @@
             <auto-parameters include="nonpk" entity-name="moqui.training.entity.MoquiTraining"/>
             <parameter name="trainingId" required="true"><text-length max="255" min="1"></text-length></parameter>
             <parameter name="trainingName" required="true"><text-length max="255" min="1"></text-length></parameter>
-            <parameter name="trainingDate" default-value="1990-01-01"><time-range format="MM/dd/YYYY" /></parameter>
+            <parameter name="trainingDate" ><time-range format="MM-dd-YYYY" /></parameter>
             <parameter name="trainingPrice" default-value="0">
                 <number-range min="0"></number-range>
                 <number-decimal>
@@ -79,14 +79,14 @@ Check if a record already exists for the training record using the trainingName/
 If the record already exists, update the record with input values.
 If the record does not exist, create a new record with input values.
 -->
-    <service verb="createOrUpdate" noun="MoquiTrainingEntity">
+    <service verb="store" noun="MoquiTrainingEntity">
         <description>This service takes input value for fields and check for existence
             of such record if already present, updates the record else creates a new record</description>
         <in-parameters>
             <auto-parameters include="nonpk" entity-name="moqui.training.entity.MoquiTraining"/>
             <parameter name="trainingId" required="true"><text-length max="255" min="1"></text-length></parameter>
             <parameter name="trainingName" required="true"><text-length max="255" min="1"></text-length></parameter>
-            <parameter name="trainingDate" default-value="1990-01-01"><time-range format="MM/dd/YYYY" /></parameter>
+            <parameter name="trainingDate" default-value="1990-01-01"><time-range format="MM-dd-YYYY" /></parameter>
             <parameter name="trainingPrice" default-value="0">
                 <number-range min="0"></number-range>
                 <number-decimal>
@@ -104,7 +104,7 @@ If the record does not exist, create a new record with input values.
         <actions>
             <entity-find-one entity-name="moqui.training.entity.MoquiTraining" value-field="entity">
             </entity-find-one>
-            <if condition="entity==null"><then>
+            <if condition="!entity"><then>
                 <entity-make-value entity-name="moqui.training.entity.MoquiTraining" value-field="entityRecord" map="[trainingId: trainingId, trainingName: trainingName, trainingDate: trainingDate, trainingPrice: trainingPrice, trainingDuration: trainingDuration]"/>
                 <entity-create value-field="entityRecord"/>
         </then><else>
